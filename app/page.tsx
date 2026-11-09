@@ -1,6 +1,6 @@
 ﻿import {
   ABOUT, AUDIT, CARE_PLANS, COMPARISON, CONTACT, DEFAULT_WA_MESSAGE, DEMOS, DEMO_NOTE, HERO, HERO_SLIDES, WORKS, OWNER,
-  PACKAGES, PAYMENT_NOTE, PRICING_FOOTNOTE, PROBLEMS, SERVICES, STEPS, highlightPackage, waLink,
+  LOCALRANK_OFFER, LOCALRANK_PACKAGES, LOCALRANK_TIMELINE, PACKAGES, REVIEWBOOST_NOTE, REVIEWBOOST_PACKAGES, PAYMENT_NOTE, PRICING_FOOTNOTE, PROBLEMS, SERVICES, STEPS, highlightPackage, waLink,
 } from "@/config/site";
 import Header from "@/components/Header";
 import { demoShots } from "@/components/DemoVisual";
@@ -186,6 +186,53 @@ export default function Home() {
                 </div>
               ))}
             </div>
+
+            <h3 className="mt-12 text-xl font-extrabold">LocalRank packages</h3>
+            <div className="mt-4 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+              {LOCALRANK_PACKAGES.map((p) => (
+                <div key={p.name} className="card flex flex-col p-6">
+                  <h4 className="text-lg font-extrabold">{p.name}</h4>
+                  <p className="mt-3 text-2xl font-extrabold">{p.price}</p>
+                  <p className="text-sm font-semibold text-teal-dark">{p.note}</p>
+                  <p className="mt-3 flex-1 text-sm text-ink/80">{p.bestFor}</p>
+                  <a href={waLink(`Hi Neovia AI, I'd like a quote for LocalRank "${p.name}".`)} target="_blank" rel="noopener noreferrer" className="btn btn-dark mt-5 text-sm">
+                    Get a quote
+                  </a>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 rounded-xl bg-saffron/20 p-4 text-sm font-bold">{LOCALRANK_OFFER}</p>
+
+            <h3 className="mt-8 text-xl font-extrabold">LocalRank website timeline</h3>
+            <div className="card mt-4 overflow-x-auto">
+              <table className="w-full text-left">
+                <caption className="sr-only">LocalRank website timeline</caption>
+                <thead className="bg-ink/5 text-sm"><tr><th scope="col" className="p-4">Stage</th><th scope="col" className="p-4">When</th><th scope="col" className="p-4">What happens</th></tr></thead>
+                <tbody>
+                  {LOCALRANK_TIMELINE.map((t) => (
+                    <tr key={t.stage} className="border-t border-ink/10"><th scope="row" className="p-4 font-bold">{t.stage}</th><td className="p-4 whitespace-nowrap">{t.when}</td><td className="p-4">{t.what}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <h3 className="mt-12 text-xl font-extrabold">ReviewBoost plans</h3>
+            <div className="mt-4 grid gap-5 md:grid-cols-2">
+              {REVIEWBOOST_PACKAGES.map((p) => (
+                <div key={p.name} className="card flex flex-col p-6">
+                  <h4 className="text-lg font-extrabold">{p.name}</h4>
+                  <p className="mt-3 text-2xl font-extrabold">{p.setup}</p>
+                  <p className="text-sm font-semibold text-teal-dark">{p.monthly}</p>
+                  <ul className="mt-3 flex-1 space-y-1 text-sm text-ink/80">
+                    {p.includes.map((i) => <li key={i}>✓ {i}</li>)}
+                  </ul>
+                  <a href={waLink(`Hi Neovia AI, I'd like a quote for "${p.name}".`)} target="_blank" rel="noopener noreferrer" className="btn btn-dark mt-5 text-sm">
+                    Get a quote
+                  </a>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 text-sm text-ink/80">{REVIEWBOOST_NOTE}</p>
 
             <h3 className="mt-12 text-xl font-extrabold">Monthly care plans (optional)</h3>
             <div className="card mt-4 overflow-hidden">

@@ -12,7 +12,7 @@ export default function Showreel() {
         <LazyVideo src="/videos/showreel.webm" poster={poster} label="One-minute video of all services" />
         <div className="p-4 text-sm">
           <p className="font-bold">All my work in one video (about a minute)</p>
-          <p className="text-ink/80">Website, chatbot, WhatsApp automation and dashboard are recordings of live demos with sample data. Mobile app, agentic AI, RAG chatbot, agentic AI chatbot and AI automation are concept animations that show the idea, not client projects.</p>
+          <p className="text-ink/80">Website, chatbot, WhatsApp automation, dashboard, LocalRank, ReviewBoost and ShowUp are recordings of live demos with sample data. Mobile app, agentic AI, RAG chatbot, agentic AI chatbot and AI automation are concept animations that show the idea, not client projects.</p>
         </div>
       </div>
     </div>

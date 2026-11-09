@@ -59,6 +59,32 @@ export const PACKAGES: Package[] = [
   },
 ];
 
+/** LocalRank packages (Google profile + website for local businesses). */
+export const LOCALRANK_PACKAGES = [
+  { name: "GBP Starter", bestFor: "Businesses that only need their Google profile fixed", price: "₹6,999", note: "one-time" },
+  { name: "LocalRank Website", bestFor: "Businesses that want a Google-ready website plus an optimised profile", price: "₹17,999", note: "one-time" },
+  { name: "Local Care", bestFor: "Keeping the website live, secure and up to date", price: "₹1,999", note: "per month" },
+  { name: "Local Growth", bestFor: "Growing calls, enquiries and reviews from Google every month", price: "₹3,999", note: "per month" },
+];
+
+/** ReviewBoost plans (Google review automation on WhatsApp). */
+export const REVIEWBOOST_PACKAGES = [
+  { name: "ReviewBoost Starter", setup: "₹9,999 setup", monthly: "+ ₹3,499 / month", includes: ["Quick-send page", "WhatsApp review messages", "Dashboard", "QR standee", "Hosting, monitoring & bug fixes included", "1 hour of changes per month"] },
+  { name: "ReviewBoost Pro", setup: "₹12,999 setup", monthly: "+ ₹3,999 / month", includes: ["Everything in Starter", "Auto triggers from billing / booking", "AI reply drafts", "Monthly review report", "Hosting, monitoring & bug fixes included", "2 hours of changes per month + priority support"] },
+];
+
+export const REVIEWBOOST_NOTE = "WhatsApp charges are passed through at actuals. Bundle ReviewBoost with LocalRank as a “Google Growth” package.";
+
+export const LOCALRANK_OFFER = "Launch offer: LocalRank Website at ₹14,999 (save ₹3,000) for our first three clients, valid until Nov 30, 2026.";
+
+export const LOCALRANK_TIMELINE = [
+  { stage: "Kick-off", when: "Day 0", what: "Advance received; we collect logo, photos, services and prices" },
+  { stage: "Google profile", when: "Days 1–3", what: "Profile optimised, photos and launch posts added" },
+  { stage: "Website build", when: "Days 3–8", what: "Pages, booking form, SEO setup" },
+  { stage: "Review", when: "Days 8–9", what: "You review; up to 2 rounds of changes" },
+  { stage: "Go-live", when: "Day 10", what: "Website live on your domain; training video shared" },
+];
+
 /** 0 = off. Otherwise 1–4 marks that package as "Most popular". */
 export const highlightPackage = 0;
 
@@ -150,6 +176,54 @@ export const DEMOS: Demo[] = [
     image: "/demos/ca-dashboard",
     price: null, // REPLACE with your price in ₹ to switch on automatic amounts
   },
+  {
+    slug: "localrank",
+    title: "LocalRank",
+    url: "https://localrank-three.vercel.app/",
+    industry: "Local businesses",
+    outcomeLine: "See how you show up on Google locally, and get a monthly report on what improved.",
+    description:
+      "A local-search tool shown on a sample pathology lab: a free audit, a before / after view of the online presence, and a monthly report, plus a website with online booking.",
+    features: [
+      "Free audit that shows where a local business is losing enquiries",
+      "Before / after comparison of the online presence",
+      "Monthly report plus a website with online booking",
+    ],
+    image: "/demos/localrank",
+    price: null, // custom quote: customer enters the amount agreed on WhatsApp
+  },
+  {
+    slug: "reviewboost",
+    title: "ReviewBoost",
+    url: "https://reviewboost-rust.vercel.app/",
+    industry: "Restaurants and local shops",
+    outcomeLine: "Every happy customer gets a one-tap link to leave a Google review.",
+    description:
+      "A Google review automation for a sample restaurant: staff taps Send, the customer gets a WhatsApp message with a one-tap link to the Google review box, and the owner watches reviews grow on one screen.",
+    features: [
+      "WhatsApp thank-you after the visit, plus one gentle reminder that stops by itself",
+      "Owner dashboard with message funnel, review count and staff leaderboard",
+      "AI reply drafts for new reviews and a printable QR standee for tables",
+    ],
+    image: "/demos/reviewboost",
+    price: null, // custom: customer enters the amount agreed on WhatsApp
+  },
+  {
+    slug: "showup",
+    title: "ShowUp",
+    url: "https://show-up-health.vercel.app/login",
+    industry: "Dental clinic",
+    outcomeLine: "A simple front-desk app for a clinic, with separate views for reception and the owner.",
+    description:
+      "A clinic app shown on a sample dental clinic (SmileCare): reception and the owner each sign in to their own view, starting from a Today screen.",
+    features: [
+      "Separate sign-ins for reception and the clinic owner",
+      "A Today screen for the front desk",
+      "Shown with a sample dental clinic and sample data",
+    ],
+    image: "/demos/showup",
+    price: null, // custom: customer enters the amount agreed on WhatsApp
+  },
 ];
 
 /** Carousel at the top of the page: everything I build. icon keys map to components/WorkCarousel.tsx */
@@ -158,6 +232,9 @@ export const WORKS = [
   { title: "Chatbot + Lead Capture", text: "A smart assistant that answers questions and saves phone numbers.", icon: "chat" },
   { title: "WhatsApp Automation", text: "Instant replies and polite follow-ups on WhatsApp.", icon: "whatsapp" },
   { title: "Dashboard", text: "Leads, clients and records in one simple place.", icon: "list" },
+  { title: "LocalRank", text: "Get found on Google: profile, website and a monthly report.", icon: "globe" },
+  { title: "ReviewBoost", text: "More Google reviews: a WhatsApp message with a one-tap review link.", icon: "chat" },
+  { title: "ShowUp", text: "A simple front-desk app for clinics: reception and owner views.", icon: "list" },
   { title: "Mobile App", text: "Simple apps for your customers or your team.", icon: "phone" },
   { title: "Agentic AI", text: "AI that handles multi-step work on its own, with your approval.", icon: "spark" },
   { title: "RAG Chatbot", text: "A chatbot that answers from your own documents.", icon: "book" },
@@ -171,6 +248,9 @@ export const HERO_SLIDES: ReadonlyArray<{ service: string; demoSlug?: string; il
   { service: "Chatbot + Lead Capture", demoSlug: "admission-assistant" },
   { service: "WhatsApp Automation", demoSlug: "whatsapp-followup" },
   { service: "Dashboard", demoSlug: "ca-dashboard" },
+  { service: "LocalRank", demoSlug: "localrank" },
+  { service: "ReviewBoost", demoSlug: "reviewboost" },
+  { service: "ShowUp", demoSlug: "showup" },
   { service: "Mobile App", illustration: "mobile" },
   { service: "Agentic AI", illustration: "agentic" },
   { service: "RAG Chatbot", illustration: "rag" },

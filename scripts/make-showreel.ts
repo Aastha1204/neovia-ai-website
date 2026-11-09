@@ -16,7 +16,7 @@ const tmp = path.join(out, ".tmp-reel");
 
 async function main() {
   await mkdir(out, { recursive: true });
-  const browser = await chromium.launch({ args: ["--autoplay-policy=no-user-gesture-required", "--allow-file-access-from-files"] });
+  const browser = await chromium.launch({ channel: process.env.PW_CHANNEL, args: ["--autoplay-policy=no-user-gesture-required", "--allow-file-access-from-files"] });
   const ctx = await browser.newContext({
     viewport: { width: 1280, height: 720 },
     recordVideo: { dir: tmp, size: { width: 1280, height: 720 } },

@@ -48,6 +48,21 @@ const steps: Record<string, (p: Page) => Promise<void>> = {
     await glide(p, 3200, 14000);
     await sleep(1500);
   },
+  "localrank": async (p) => {
+    await sleep(3000);
+    await glide(p, 3000, 12000);
+    await sleep(1500);
+  },
+  "reviewboost": async (p) => {
+    await sleep(3000);
+    await glide(p, 3600, 14000);
+    await sleep(1500);
+  },
+  "showup": async (p) => {
+    await sleep(4000);
+    await glide(p, 300, 4000);
+    await sleep(5000);
+  },
   "ca-dashboard": async (p) => {
     await sleep(3000);
     await tryClick(p, /open live demo/i);
@@ -59,7 +74,7 @@ const steps: Record<string, (p: Page) => Promise<void>> = {
 
 async function main() {
   await mkdir(OUT, { recursive: true });
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ channel: process.env.PW_CHANNEL });
   const results: string[] = [];
   const only = process.argv.slice(2); // optional: slugs to record, e.g. npm run record-demos clinic-website
 
