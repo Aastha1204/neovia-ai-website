@@ -15,8 +15,8 @@ function Card({ w }: { w: Work }) {
   const Icon = ICONS[w.icon];
   const ready = useContext(Ready);
   return (
-    <li className="w-64 shrink-0 rounded-2xl bg-white p-3 shadow-md ring-1 ring-ink/10 sm:w-72">
-      <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-mist ring-1 ring-ink/10 [container-type:inline-size]">
+    <li className="work-card glass w-64 shrink-0 rounded-2xl p-3 sm:w-72">
+      <div className="img-fx relative aspect-[16/10] overflow-hidden rounded-xl bg-mist ring-1 ring-ink/10 [container-type:inline-size]">
         {w.illustration ? (
           (() => { const Ill = ILLUSTRATIONS[w.illustration]; return <Ill />; })()
         ) : w.desktop && ready ? (

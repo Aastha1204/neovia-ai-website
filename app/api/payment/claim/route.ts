@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { rateLimited } from "@/lib/rate-limit";
-import { CONTACT } from "@/config/site";
-import { receiptHtml, sendEmail, type ReceiptData } from "@/lib/email";
+import { receiptHtml, ownerEmail, sendEmail, type ReceiptData } from "@/lib/email";
 
 const clean = (v: unknown, max: number) => (typeof v === "string" ? v.trim().slice(0, max) : "");
 
@@ -37,7 +36,7 @@ export async function POST(req: Request) {
   const html = receiptHtml(receipt);
   const mailed = (await Promise.all([
     email ? sendEmail(email, `We received your payment note, ${project}`, html) : false,
-    sendEmail(CONTACT.email, `UPI payment claimed: ${project} (₹${amount.toLocaleString("en-IN")})`, html),
+    sendEmail(ownerEmail(), `UPI payment claimed: ${project} (₹${amount.toLocaleString("en-IN")})`, html),
   ])).some(Boolean);
 
   return NextResponse.json({ ok: true, saved, mailed, receipt });

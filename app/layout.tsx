@@ -2,6 +2,11 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import NeoChat from "@/components/NeoChat";
+import Loader from "@/components/fx/Loader";
+
+// Runs before first paint: marks the page as motion-enabled so reveal styles apply from the start (skipped for reduced motion; without JS everything stays visible).
+const FX_BOOT = "try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('fx')}catch(e){}";
 import { ANALYTICS_ID, CONTACT, OWNER } from "@/config/site";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -46,10 +51,15 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={inter.variable}>
+    <html lang="en-IN" className={inter.variable} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: FX_BOOT }} />
+      </head>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <Loader />
         {children}
+        <NeoChat />
         {ANALYTICS_ID && <Script defer data-domain={ANALYTICS_ID} src="https://plausible.io/js/script.js" strategy="afterInteractive" />}
       </body>
     </html>

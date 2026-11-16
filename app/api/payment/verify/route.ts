@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { createHmac, timingSafeEqual } from "node:crypto";
-import { CONTACT } from "@/config/site";
-import { receiptHtml, sendEmail, type ReceiptData } from "@/lib/email";
+import { receiptHtml, ownerEmail, sendEmail, type ReceiptData } from "@/lib/email";
 
 /**
  * Confirms the signature Razorpay returns, then reads the payment from Razorpay (so the receipt shows the real amount),
@@ -45,7 +44,7 @@ export async function POST(req: Request) {
   const html = receiptHtml(receipt);
   await Promise.all([
     receipt.email ? sendEmail(receipt.email, `Your payment receipt, ${receipt.project}`, html) : false,
-    sendEmail(CONTACT.email, `Payment received: ${receipt.project} (₹${receipt.amount.toLocaleString("en-IN")})`, html),
+    sendEmail(ownerEmail(), `Payment received: ${receipt.project} (₹${receipt.amount.toLocaleString("en-IN")})`, html),
   ]);
   return NextResponse.json({ ok: true, receipt });
 }

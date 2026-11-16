@@ -16,8 +16,30 @@ export const CONTACT = {
   phone: "+918691969772",
   whatsapp: "918691969772", // country code, no +
   email: "aasthaagnihotri979@gmail.com",
-  bookingUrl: "", // e.g. a Calendly / Cal.com link. Empty = "Book a call" is hidden, WhatsApp is used.
+  bookingUrl: "/book-meeting", // page with the built-in meeting calendar. Empty = "Book a call" is hidden, WhatsApp is used.
   demoVideoUrl: "", // REPLACE with a ~30 second video (mp4 / YouTube embed). Empty = placeholder shown.
+};
+
+/** Meeting calendar (page /book-meeting). Times are India time. Change days and hours here. */
+export const MEETING = {
+  timezone: "Asia/Kolkata",
+  weekdays: [1, 2, 3, 4, 5, 6] as readonly number[], // 0 = Sunday ... 6 = Saturday
+  start: "10:00",
+  end: "18:00",
+  durationMin: 30,
+  advanceDays: 30, // how far ahead people can book
+  leadMinutes: 120, // earliest booking is this long from now
+  topics: ["See a demo", "Pricing and packages", "A custom project", "Something else"],
+  modes: ["Google Meet video call", "Phone call", "WhatsApp video call"],
+};
+
+/** Neo, the website chat assistant (see lib/neo-prompt.ts for its instructions). */
+export const NEO = {
+  name: "Neo",
+  // Which AI answers: NEO_PROVIDER=openai (GPT) or anthropic (Claude). Unset = OpenAI if only OPENAI_API_KEY exists, else Anthropic.
+  openaiModel: process.env.OPENAI_MODEL || "gpt-4o-mini",
+  // Claude model. Default is the most capable; for lower running cost set NEO_MODEL=claude-haiku-5-5 or claude-sonnet-5-5.
+  model: process.env.NEO_MODEL || "claude-opus-5-5",
 };
 
 export const PILOT_OFFER = {
@@ -57,32 +79,6 @@ export const PACKAGES: Package[] = [
     note: "Custom quote for larger scopes",
     includes: "Complex multi-agent systems, enterprise integrations and customised AI platforms.",
   },
-];
-
-/** LocalRank packages (Google profile + website for local businesses). */
-export const LOCALRANK_PACKAGES = [
-  { name: "GBP Starter", bestFor: "Businesses that only need their Google profile fixed", price: "₹6,999", note: "one-time" },
-  { name: "LocalRank Website", bestFor: "Businesses that want a Google-ready website plus an optimised profile", price: "₹17,999", note: "one-time" },
-  { name: "Local Care", bestFor: "Keeping the website live, secure and up to date", price: "₹1,999", note: "per month" },
-  { name: "Local Growth", bestFor: "Growing calls, enquiries and reviews from Google every month", price: "₹3,999", note: "per month" },
-];
-
-/** ReviewBoost plans (Google review automation on WhatsApp). */
-export const REVIEWBOOST_PACKAGES = [
-  { name: "ReviewBoost Starter", setup: "₹9,999 setup", monthly: "+ ₹3,499 / month", includes: ["Quick-send page", "WhatsApp review messages", "Dashboard", "QR standee", "Hosting, monitoring & bug fixes included", "1 hour of changes per month"] },
-  { name: "ReviewBoost Pro", setup: "₹12,999 setup", monthly: "+ ₹3,999 / month", includes: ["Everything in Starter", "Auto triggers from billing / booking", "AI reply drafts", "Monthly review report", "Hosting, monitoring & bug fixes included", "2 hours of changes per month + priority support"] },
-];
-
-export const REVIEWBOOST_NOTE = "WhatsApp charges are passed through at actuals. Bundle ReviewBoost with LocalRank as a “Google Growth” package.";
-
-export const LOCALRANK_OFFER = "Launch offer: LocalRank Website at ₹14,999 (save ₹3,000) for our first three clients, valid until Nov 30, 2026.";
-
-export const LOCALRANK_TIMELINE = [
-  { stage: "Kick-off", when: "Day 0", what: "Advance received; we collect logo, photos, services and prices" },
-  { stage: "Google profile", when: "Days 1–3", what: "Profile optimised, photos and launch posts added" },
-  { stage: "Website build", when: "Days 3–8", what: "Pages, booking form, SEO setup" },
-  { stage: "Review", when: "Days 8–9", what: "You review; up to 2 rounds of changes" },
-  { stage: "Go-live", when: "Day 10", what: "Website live on your domain; training video shared" },
 ];
 
 /** 0 = off. Otherwise 1–4 marks that package as "Most popular". */
@@ -224,6 +220,102 @@ export const DEMOS: Demo[] = [
     image: "/demos/showup",
     price: null, // custom: customer enters the amount agreed on WhatsApp
   },
+  {
+    slug: "slotpay",
+    title: "SlotPay",
+    url: "https://slotpay.vercel.app",
+    industry: "Salon and spa",
+    outcomeLine: "Customers book a slot and pay a small advance online, so fewer no-shows and no phone calls.",
+    description:
+      "An online booking site for a sample salon and spa: the customer picks a service, a stylist and a time, pays a small advance, and gets confirmation and reminders on WhatsApp.",
+    features: [
+      "Pick a service, stylist and time with live availability",
+      "Pay a small advance (₹100–₹200) by UPI, card or netbanking; the slot is held while paying",
+      "WhatsApp confirmation and reminders with one-tap Reschedule or Cancel",
+    ],
+    image: "/demos/slotpay",
+    price: null, // custom: customer enters the amount agreed on WhatsApp
+  },
+  {
+    slug: "billease",
+    title: "BillEase",
+    url: "https://bill-ease.vercel.app",
+    industry: "Shops and traders",
+    outcomeLine: "A correct GST invoice in under a minute, sent on WhatsApp, with payments tracked.",
+    description:
+      "A GST billing app shown with a sample electrical business: create an invoice, send it on WhatsApp with a UPI QR, track who has paid, and hand the CA a clean monthly GST summary.",
+    features: [
+      "GST invoice in under a minute, sent on WhatsApp with a UPI QR",
+      "Dashboard with sales, receivables, overdue invoices and ageing",
+      "Separate CA (white-label) view with a monthly GST summary",
+    ],
+    image: "/demos/billease",
+    price: null, // custom: customer enters the amount agreed on WhatsApp
+  },
+  {
+    slug: "callcatch",
+    title: "CallCatch",
+    url: "https://call-catch-five.vercel.app",
+    industry: "Any local business",
+    outcomeLine: "Every call gets answered, even at 10 pm on a Sunday, and the lead lands on WhatsApp.",
+    description:
+      "An AI call assistant shown on a fictional business: Riya answers calls in Hindi, English and Hinglish, captures the lead, books a callback and sends everything to WhatsApp.",
+    features: [
+      "Answers calls in Hindi, English and Hinglish, day or night",
+      "Captures the lead and books a callback",
+      "Sends everything to WhatsApp, with a dashboard and missed-call recovery",
+    ],
+    image: "/demos/callcatch",
+    price: null, // custom: customer enters the amount agreed on WhatsApp
+  },
+  {
+    slug: "postpilot",
+    title: "PostPilot",
+    url: "https://post-pilot-khaki.vercel.app",
+    industry: "Event decor, cafés and gyms",
+    outcomeLine: "A month of on-brand social posts, approved on WhatsApp and published on time.",
+    description:
+      "A social media tool shown on three sample businesses (an event decorator, a café and a gym): it plans a month of posts for Instagram and Facebook, you approve them on WhatsApp, and they go out on time.",
+    features: [
+      "A month of on-brand posts planned for Instagram and Facebook",
+      "Approve posts on WhatsApp",
+      "Published on time, with a preview for each sample business",
+    ],
+    image: "/demos/postpilot",
+    price: null, // custom: customer enters the amount agreed on WhatsApp
+  },
+  {
+    slug: "leadlaunch",
+    title: "LeadLaunch",
+    url: "https://lead-launch-k5h1.vercel.app",
+    industry: "Real estate",
+    outcomeLine: "Buyers explore the project, unlock the brochure and book a site visit in one place.",
+    description:
+      "A project landing page shown on a fictional apartment tower in Dombivli East: buyers see 1 and 2 BHK plans in 3D, unlock the brochure with their number, and book a site-visit slot.",
+    features: [
+      "3D dollhouse and walkthrough of each home, with the full floor plan unlocked after a lead is captured",
+      "Brochure and price sheet request that saves the buyer’s name and number",
+      "Site-visit booking with live time slots, plus amenities, connectivity and FAQs",
+    ],
+    image: "/demos/leadlaunch",
+    price: null, // custom: customer enters the amount agreed on WhatsApp
+  },
+  {
+    slug: "leadlens",
+    title: "LeadLens",
+    url: "https://lead-lens-sigma.vercel.app",
+    industry: "Any business running ads",
+    outcomeLine: "On the 1st of every month, a one-page report on WhatsApp shows what your marketing money did.",
+    description:
+      "A monthly marketing report shown on a sample business: enquiries from Instagram ads, Google, calls, website and WhatsApp come into one table, and a one-page report plus a live dashboard land on WhatsApp.",
+    features: [
+      "All lead sources in one table, with duplicate enquiries counted once",
+      "Enquiries, reply time, funnel and cost per lead, each traceable to its rows",
+      "A one-page report on WhatsApp on the 1st; reply WON or LOST to keep it accurate",
+    ],
+    image: "/demos/leadlens",
+    price: null, // custom: customer enters the amount agreed on WhatsApp
+  },
 ];
 
 /** Carousel at the top of the page: everything I build. icon keys map to components/WorkCarousel.tsx */
@@ -235,6 +327,12 @@ export const WORKS = [
   { title: "LocalRank", text: "Get found on Google: profile, website and a monthly report.", icon: "globe" },
   { title: "ReviewBoost", text: "More Google reviews: a WhatsApp message with a one-tap review link.", icon: "chat" },
   { title: "ShowUp", text: "A simple front-desk app for clinics: reception and owner views.", icon: "list" },
+  { title: "SlotPay", text: "Online booking with a small advance payment and WhatsApp reminders.", icon: "globe" },
+  { title: "BillEase", text: "GST invoices on WhatsApp, with payments tracked and a CA summary.", icon: "list" },
+  { title: "CallCatch", text: "An AI that answers your calls and sends every lead to WhatsApp.", icon: "phone" },
+  { title: "PostPilot", text: "A month of social posts, approved on WhatsApp and published on time.", icon: "spark" },
+  { title: "LeadLaunch", text: "A real-estate project page with 3D plans, brochure unlock and site-visit booking.", icon: "globe" },
+  { title: "LeadLens", text: "A monthly WhatsApp report on enquiries, reply time and what converted.", icon: "list" },
   { title: "Mobile App", text: "Simple apps for your customers or your team.", icon: "phone" },
   { title: "Agentic AI", text: "AI that handles multi-step work on its own, with your approval.", icon: "spark" },
   { title: "RAG Chatbot", text: "A chatbot that answers from your own documents.", icon: "book" },
@@ -251,6 +349,12 @@ export const HERO_SLIDES: ReadonlyArray<{ service: string; demoSlug?: string; il
   { service: "LocalRank", demoSlug: "localrank" },
   { service: "ReviewBoost", demoSlug: "reviewboost" },
   { service: "ShowUp", demoSlug: "showup" },
+  { service: "SlotPay", demoSlug: "slotpay" },
+  { service: "BillEase", demoSlug: "billease" },
+  { service: "CallCatch", demoSlug: "callcatch" },
+  { service: "PostPilot", demoSlug: "postpilot" },
+  { service: "LeadLaunch", demoSlug: "leadlaunch" },
+  { service: "LeadLens", demoSlug: "leadlens" },
   { service: "Mobile App", illustration: "mobile" },
   { service: "Agentic AI", illustration: "agentic" },
   { service: "RAG Chatbot", illustration: "rag" },

@@ -72,11 +72,11 @@ export default function HeroCarousel({ slides }: { slides: Slide[] }) {
         </div>
       </div>
 
-      <div className="mt-10 flex items-center justify-between gap-3">
-        <p className="text-sm text-white/90" aria-live={hold || reduced ? "polite" : "off"}>
+      <div className="mt-10 flex flex-wrap items-center justify-between gap-3">
+        <p className="min-w-0 text-sm text-ink/80" aria-live={hold || reduced ? "polite" : "off"}>
           <span className="font-bold">{cur.service}</span> · {cur.label}
         </p>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-1">
           {slides.map((s, n) => (
             <button
               key={s.service}
@@ -86,7 +86,7 @@ export default function HeroCarousel({ slides }: { slides: Slide[] }) {
               aria-current={n === i}
               className="flex h-6 w-6 items-center justify-center"
             >
-              <span className={`block h-2.5 rounded-full transition-all ${n === i ? "w-5 bg-saffron" : "w-2.5 bg-white/50"}`} />
+              <span className={`block h-2.5 rounded-full transition-all ${n === i ? "w-5 bg-saffron-dark" : "w-2.5 bg-ink/25"}`} />
             </button>
           ))}
         </div>

@@ -25,8 +25,8 @@ function Placeholder({ title }: { title: string }) {
 export default function DemoVisual({ demo, priority = false }: { demo: Demo; priority?: boolean }) {
   const { desktop, mobile } = demoShots(demo);
   return (
-    <div className="relative">
-      <div className="overflow-hidden rounded-xl border border-ink/10 bg-white shadow-xl">
+    <div className="relative" data-tilt="6">
+      <div className="img-fx shine overflow-hidden rounded-xl border border-ink/10 bg-white shadow-xl">
         <div className="flex items-center gap-1.5 border-b border-ink/10 bg-mist px-3 py-2" aria-hidden="true">
           <span className="h-2.5 w-2.5 rounded-full bg-[#ff6b5e]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#f5c04a]" />

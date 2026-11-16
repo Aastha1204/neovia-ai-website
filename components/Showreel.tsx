@@ -7,12 +7,12 @@ export default function Showreel() {
   if (!fs.existsSync(path.join(process.cwd(), "public", "videos", "showreel.webm"))) return null;
   const poster = fs.existsSync(path.join(process.cwd(), "public", "videos", "showreel-poster.jpg")) ? "/videos/showreel-poster.jpg" : undefined;
   return (
-    <div className="mt-8">
-      <div className="card overflow-hidden">
+    <div className="mt-8" data-reveal="scale">
+      <div className="card overflow-hidden" data-tilt="3">
         <LazyVideo src="/videos/showreel.webm" poster={poster} label="One-minute video of all services" />
         <div className="p-4 text-sm">
           <p className="font-bold">All my work in one video (about a minute)</p>
-          <p className="text-ink/80">Website, chatbot, WhatsApp automation, dashboard, LocalRank, ReviewBoost and ShowUp are recordings of live demos with sample data. Mobile app, agentic AI, RAG chatbot, agentic AI chatbot and AI automation are concept animations that show the idea, not client projects.</p>
+          <p className="text-ink/80">Website, chatbot, WhatsApp automation, dashboard, LocalRank, ReviewBoost, ShowUp, SlotPay, BillEase, CallCatch, PostPilot, LeadLaunch and LeadLens are recordings of live demos with sample data. Mobile app, agentic AI, RAG chatbot, agentic AI chatbot and AI automation are concept animations that show the idea, not client projects.</p>
         </div>
       </div>
     </div>

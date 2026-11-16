@@ -1,8 +1,13 @@
 ﻿import {
-  ABOUT, AUDIT, CARE_PLANS, COMPARISON, CONTACT, DEFAULT_WA_MESSAGE, DEMOS, DEMO_NOTE, HERO, HERO_SLIDES, WORKS, OWNER,
-  LOCALRANK_OFFER, LOCALRANK_PACKAGES, LOCALRANK_TIMELINE, PACKAGES, REVIEWBOOST_NOTE, REVIEWBOOST_PACKAGES, PAYMENT_NOTE, PRICING_FOOTNOTE, PROBLEMS, SERVICES, STEPS, highlightPackage, waLink,
+  ABOUT, AUDIT, COMPARISON, CONTACT, DEFAULT_WA_MESSAGE, DEMOS, DEMO_NOTE, HERO, HERO_SLIDES, WORKS, OWNER,
+  PAYMENT_NOTE, PROBLEMS, SERVICES, STEPS, waLink,
 } from "@/config/site";
 import Header from "@/components/Header";
+import HeroFX from "@/components/fx/HeroFX";
+import ShaderBackground from "@/components/fx/ShaderBackground";
+import SplitText from "@/components/fx/SplitText";
+import Orbs from "@/components/fx/Orbs";
+import FloatingTiles from "@/components/fx/FloatingTiles";
 import { demoShots } from "@/components/DemoVisual";
 import HeroCarousel from "@/components/HeroCarousel";
 import DemoCard from "@/components/DemoCard";
@@ -44,58 +49,64 @@ export default function Home() {
           })}
         />
         {/* HERO */}
-        <section className="section overflow-hidden bg-ink pb-24 pt-14 text-white">
-          <div className="wrap grid items-center gap-12 lg:grid-cols-2">
+        <section className="section relative overflow-hidden bg-mist pb-24 pt-14 text-ink">
+          <HeroFX />
+          <div className="wrap relative grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <p className="eyebrow !text-teal">{OWNER.brand} · {OWNER.city}</p>
-              <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl">{HERO.headline}</h1>
-              <p className="rise rise-2 mt-5 max-w-xl text-lg text-white/85">{HERO.sub}</p>
+              <p className="eyebrow rise">{OWNER.brand} · {OWNER.city}</p>
+              <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl"><SplitText text={HERO.headline} start={120} /></h1>
+              <p className="rise rise-2 mt-5 max-w-xl text-lg text-ink/80">{HERO.sub}</p>
               <div className="rise rise-3 mt-7 flex flex-col gap-3 sm:flex-row">
-                <a href={waLink(DEFAULT_WA_MESSAGE)} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                <a href={waLink(DEFAULT_WA_MESSAGE)} target="_blank" rel="noopener noreferrer" data-magnetic className="btn btn-primary">
                   <WhatsAppIcon /> Get a free demo for my business
                 </a>
-                <a href="#demos" className="btn btn-ghost text-white">See live demos</a>
+                <a href="#demos" data-magnetic data-cursor-text="Scroll" className="btn btn-ghost text-ink">See live demos</a>
               </div>
               <ul className="rise rise-3 mt-7 flex flex-wrap gap-2">
                 {HERO.chips.map((c) => (
-                  <li key={c} className="rounded-full bg-white/10 px-3 py-1.5 text-sm font-semibold ring-1 ring-white/20">{c}</li>
+                  <li key={c} className="chip rounded-full bg-white/70 px-3 py-1.5 text-sm font-semibold ring-1 ring-ink/10">{c}</li>
                 ))}
               </ul>
             </div>
-            <div className="pr-4 lg:pr-8">
+            <div className="pr-4 lg:pr-8" data-parallax="-0.06" suppressHydrationWarning>
+              <div className="pop float" style={{ animationDelay: "300ms, 1.3s" }}>
+              <div data-tilt="5" data-cursor-text="Live demo" className="hero-glass">
               <HeroCarousel slides={HERO_SLIDES.map((h) => {
                 const d = DEMOS.find((x) => x.slug === h.demoSlug);
                 return d
                   ? { service: h.service, label: "Live demo · sample data", url: d.url, ...demoShots(d) }
                   : { service: h.service, label: "Illustration · no live demo yet", url: null, desktop: null, mobile: null, illustration: h.illustration };
               })} />
+              </div>
+              </div>
             </div>
           </div>
+          <FloatingTiles />
         </section>
 
         {/* PROBLEMS */}
         <section className="section">
           <div className="wrap">
-            <p className="eyebrow">The cost of doing nothing</p>
-            <h2 className="h2 mt-2 max-w-2xl">Every day, some enquiries quietly slip away</h2>
-            <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <p data-reveal="up" className="eyebrow">The cost of doing nothing</p>
+            <h2 data-reveal="up" data-reveal-delay="90" className="h2 mt-2 max-w-2xl">Every day, some enquiries quietly slip away</h2>
+            <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-reveal="stagger">
               {PROBLEMS.map((p) => (
-                <div key={p.title} className="card p-6">
+                <div key={p.title} className="card p-6" data-tilt="8" data-glare>
                   <h3 className="text-lg font-extrabold">{p.title}</h3>
                   <p className="mt-2 text-sm text-ink/80">{p.text}</p>
                 </div>
               ))}
             </div>
-            <div className="mt-8"><a href="#audit" className="btn btn-dark">See where you are losing enquiries</a></div>
+            <div className="mt-8" data-reveal="up"><a href="#audit" data-magnetic className="btn btn-dark">See where you are losing enquiries</a></div>
           </div>
         </section>
 
         {/* BEFORE / AFTER */}
         <section className="section bg-mist">
           <div className="wrap">
-            <p className="eyebrow">Before and after</p>
-            <h2 className="h2 mt-2">Without automation vs with automation</h2>
-            <div className="card mt-8 overflow-hidden">
+            <p data-reveal="up" className="eyebrow">Before and after</p>
+            <h2 data-reveal="up" data-reveal-delay="90" className="h2 mt-2">Without automation vs with automation</h2>
+            <div className="card mt-8 overflow-hidden" data-reveal="up" data-reveal-delay="150">
               <table className="w-full text-left text-sm sm:text-base">
                 <caption className="sr-only">Comparison of working without and with automation</caption>
                 <thead>
@@ -120,21 +131,25 @@ export default function Home() {
         {/* INDUSTRIES */}
         <section id="solutions" className="section">
           <div className="wrap">
-            <p className="eyebrow">Solutions by industry</p>
-            <h2 className="h2 mt-2">Solutions made for your kind of business</h2>
+            <p data-reveal="up" className="eyebrow">Solutions by industry</p>
+            <h2 data-reveal="up" data-reveal-delay="90" className="h2 mt-2">Solutions made for your kind of business</h2>
             <IndustryTabs />
           </div>
         </section>
 
         {/* DEMOS */}
-        <section id="demos" className="section bg-mist">
-          <div className="wrap">
-            <p className="eyebrow">Live demos</p>
-            <h2 className="h2 mt-2 max-w-2xl">See a free demo: these are real, working demos</h2>
+        <section id="demos" className="section relative overflow-hidden bg-mist">
+          <Orbs />
+          <div className="wrap relative">
+            <p data-reveal="up" className="eyebrow">Live demos</p>
+            <h2 data-reveal="up" data-reveal-delay="90" className="h2 mt-2 max-w-2xl">See a free demo: these are real, working demos</h2>
             <p className="mt-3 text-ink/80">Each demo uses sample data. {DEMO_NOTE}</p>
             <Showreel />
-            <div className="mt-10 grid gap-10 lg:grid-cols-2">
-              {DEMOS.map((d) => <DemoCard key={d.slug} demo={d} cardEnabled={Boolean(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)} />)}
+            <div className="mt-10 grid gap-10 lg:grid-cols-2" data-reveal="stagger">
+              {DEMOS.slice(0, 4).map((d) => <DemoCard key={d.slug} demo={d} cardEnabled={Boolean(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)} />)}
+            </div>
+            <div className="mt-10 text-center" data-reveal="up">
+              <a href="/demos" data-magnetic className="btn btn-primary">See all {DEMOS.length} demos</a>
             </div>
           </div>
         </section>
@@ -142,11 +157,11 @@ export default function Home() {
         {/* SERVICES */}
         <section className="section">
           <div className="wrap">
-            <p className="eyebrow">Services</p>
-            <h2 className="h2 mt-2">Exactly what your business needs</h2>
-            <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            <p data-reveal="up" className="eyebrow">Services</p>
+            <h2 data-reveal="up" data-reveal-delay="90" className="h2 mt-2">Exactly what your business needs</h2>
+            <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3" data-reveal="stagger">
               {SERVICES.map((s) => (
-                <div key={s.name} className="card p-6">
+                <div key={s.name} className="card p-6" data-tilt="8" data-glare>
                   <h3 className="text-lg font-extrabold">{s.name}</h3>
                   <p className="mt-2 text-sm text-ink/80"><strong>What you get:</strong> {s.get}</p>
                   <p className="mt-3 inline-block rounded-full bg-saffron/25 px-3 py-1 text-xs font-bold">Typical delivery: {s.time}</p>
@@ -159,121 +174,51 @@ export default function Home() {
         {/* ROI */}
         <section className="section bg-mist">
           <div className="wrap">
-            <p className="eyebrow">Simple estimator</p>
-            <h2 className="h2 mt-2">How many enquiries are slipping away? Enter your numbers</h2>
+            <p data-reveal="up" className="eyebrow">Simple estimator</p>
+            <h2 data-reveal="up" data-reveal-delay="90" className="h2 mt-2">How many enquiries are slipping away? Enter your numbers</h2>
             <RoiEstimator />
           </div>
         </section>
 
         {/* PRICING */}
-        <section id="pricing" className="section">
-          <div className="wrap">
-            <p className="eyebrow">Pricing</p>
-            <h2 className="h2 mt-2">Clear price ranges, no surprises</h2>
-            <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-              {PACKAGES.map((p, i) => (
-                <div key={p.name} className={`card relative flex flex-col p-6 ${highlightPackage === i + 1 ? "ring-2 ring-saffron" : ""}`}>
-                  {highlightPackage === i + 1 && (
-                    <span className="absolute -top-3 left-6 rounded-full bg-saffron px-3 py-1 text-xs font-extrabold">Most popular</span>
-                  )}
-                  <h3 className="text-lg font-extrabold">{p.name}</h3>
-                  <p className="mt-3 text-2xl font-extrabold">{p.range}</p>
-                  <p className="text-sm font-semibold text-teal-dark">{p.note}</p>
-                  <p className="mt-3 flex-1 text-sm text-ink/80">{p.includes}</p>
-                  <a href={waLink(`Hi Neovia AI, I'd like a quote for "${p.name}".`)} target="_blank" rel="noopener noreferrer" className="btn btn-dark mt-5 text-sm">
-                    Get a quote
-                  </a>
-                </div>
-              ))}
+        <section id="pricing" className="section relative overflow-hidden">
+          <Orbs variant="b" />
+          <div className="wrap relative">
+            <p data-reveal="up" className="eyebrow">Pricing</p>
+            <h2 data-reveal="up" data-reveal-delay="90" className="h2 mt-2">Simple pricing for every Neovia AI service</h2>
+            <p className="mt-3 max-w-3xl text-ink/80">Pick Basic, Advance or Pro for any service. You pay a one-time setup and a monthly fee that covers hosting, AI usage and support. All prices exclude 18% GST.</p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row" data-reveal="up" data-reveal-delay="200">
+              <a href="/pricing" data-magnetic className="btn btn-primary">See all plans and offers</a>
+              <a href="/book-meeting" data-magnetic className="btn btn-ghost text-ink">Book a meeting</a>
             </div>
-
-            <h3 className="mt-12 text-xl font-extrabold">LocalRank packages</h3>
-            <div className="mt-4 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-              {LOCALRANK_PACKAGES.map((p) => (
-                <div key={p.name} className="card flex flex-col p-6">
-                  <h4 className="text-lg font-extrabold">{p.name}</h4>
-                  <p className="mt-3 text-2xl font-extrabold">{p.price}</p>
-                  <p className="text-sm font-semibold text-teal-dark">{p.note}</p>
-                  <p className="mt-3 flex-1 text-sm text-ink/80">{p.bestFor}</p>
-                  <a href={waLink(`Hi Neovia AI, I'd like a quote for LocalRank "${p.name}".`)} target="_blank" rel="noopener noreferrer" className="btn btn-dark mt-5 text-sm">
-                    Get a quote
-                  </a>
-                </div>
-              ))}
-            </div>
-            <p className="mt-4 rounded-xl bg-saffron/20 p-4 text-sm font-bold">{LOCALRANK_OFFER}</p>
-
-            <h3 className="mt-8 text-xl font-extrabold">LocalRank website timeline</h3>
-            <div className="card mt-4 overflow-x-auto">
-              <table className="w-full text-left">
-                <caption className="sr-only">LocalRank website timeline</caption>
-                <thead className="bg-ink/5 text-sm"><tr><th scope="col" className="p-4">Stage</th><th scope="col" className="p-4">When</th><th scope="col" className="p-4">What happens</th></tr></thead>
-                <tbody>
-                  {LOCALRANK_TIMELINE.map((t) => (
-                    <tr key={t.stage} className="border-t border-ink/10"><th scope="row" className="p-4 font-bold">{t.stage}</th><td className="p-4 whitespace-nowrap">{t.when}</td><td className="p-4">{t.what}</td></tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            <h3 className="mt-12 text-xl font-extrabold">ReviewBoost plans</h3>
-            <div className="mt-4 grid gap-5 md:grid-cols-2">
-              {REVIEWBOOST_PACKAGES.map((p) => (
-                <div key={p.name} className="card flex flex-col p-6">
-                  <h4 className="text-lg font-extrabold">{p.name}</h4>
-                  <p className="mt-3 text-2xl font-extrabold">{p.setup}</p>
-                  <p className="text-sm font-semibold text-teal-dark">{p.monthly}</p>
-                  <ul className="mt-3 flex-1 space-y-1 text-sm text-ink/80">
-                    {p.includes.map((i) => <li key={i}>✓ {i}</li>)}
-                  </ul>
-                  <a href={waLink(`Hi Neovia AI, I'd like a quote for "${p.name}".`)} target="_blank" rel="noopener noreferrer" className="btn btn-dark mt-5 text-sm">
-                    Get a quote
-                  </a>
-                </div>
-              ))}
-            </div>
-            <p className="mt-4 text-sm text-ink/80">{REVIEWBOOST_NOTE}</p>
-
-            <h3 className="mt-12 text-xl font-extrabold">Monthly care plans (optional)</h3>
-            <div className="card mt-4 overflow-hidden">
-              <table className="w-full text-left">
-                <caption className="sr-only">Optional monthly care plans</caption>
-                <thead className="bg-ink/5 text-sm"><tr><th scope="col" className="p-4">Plan</th><th scope="col" className="p-4">Price</th></tr></thead>
-                <tbody>
-                  {CARE_PLANS.map((c) => (
-                    <tr key={c.name} className="border-t border-ink/10"><th scope="row" className="p-4 font-bold">{c.name}</th><td className="p-4">{c.price}</td></tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="mt-5 max-w-3xl text-sm text-ink/80">{PRICING_FOOTNOTE}</p>
           </div>
         </section>
 
         {/* PAYMENTS */}
         <section id="pay" className="section bg-mist">
           <div className="wrap">
-            <p className="eyebrow">Payments</p>
-            <h2 className="h2 mt-2">Easy, safe ways to pay</h2>
+            <p data-reveal="up" className="eyebrow">Payments</p>
+            <h2 data-reveal="up" data-reveal-delay="90" className="h2 mt-2">Easy, safe ways to pay</h2>
             <Payments cardEnabled={Boolean(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)} />
           </div>
         </section>
 
         {/* HOW IT WORKS */}
-        <section className="section bg-ink text-white">
-          <div className="wrap">
-            <p className="eyebrow !text-teal">How it works</p>
-            <h2 className="h2 mt-2">Four simple steps</h2>
-            <ol className="mt-8 grid gap-5 md:grid-cols-4">
+        <section className="section relative overflow-hidden bg-mist text-ink">
+          <ShaderBackground intensity={0.7} />
+          <div className="wrap relative">
+            <p data-reveal="up" className="eyebrow">How it works</p>
+            <h2 data-reveal="up" data-reveal-delay="90" className="h2 mt-2">Four simple steps</h2>
+            <ol className="mt-8 grid gap-5 md:grid-cols-4" data-reveal="stagger">
               {STEPS.map((s, i) => (
-                <li key={s.title} className="rounded-2xl bg-white/10 p-6 ring-1 ring-white/15">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-saffron font-extrabold text-ink">{i + 1}</span>
+                <li key={s.title} className="rounded-2xl bg-white/75 p-6 ring-1 ring-ink/10 backdrop-blur-sm" data-tilt="8" data-glare>
+                  <span className="step-no flex h-9 w-9 items-center justify-center rounded-full bg-saffron font-extrabold text-ink">{i + 1}</span>
                   <h3 className="mt-4 text-lg font-extrabold">{s.title}</h3>
-                  <p className="mt-2 text-sm text-white/85">{s.text}</p>
+                  <p className="mt-2 text-sm text-ink/80">{s.text}</p>
                 </li>
               ))}
             </ol>
-            <p className="mt-6 font-semibold text-saffron">{PAYMENT_NOTE}</p>
+            <p className="mt-6 font-semibold text-saffron-dark">{PAYMENT_NOTE}</p>
           </div>
         </section>
 
@@ -281,25 +226,25 @@ export default function Home() {
         <section className="section">
           <div className="wrap grid gap-10 lg:grid-cols-2">
             <div>
-              <p className="eyebrow">Why work with me</p>
-              <h2 className="h2 mt-2">Straight talk, clean work</h2>
-              <p className="mt-4 text-lg text-ink/85">{ABOUT.bio}</p>
+              <p data-reveal="up" className="eyebrow">Why work with me</p>
+              <h2 data-reveal="up" data-reveal-delay="90" className="h2 mt-2">Straight talk, clean work</h2>
+              <p className="mt-4 text-lg text-ink/85" data-reveal="up" data-reveal-delay="180">{ABOUT.bio}</p>
               <ul className="mt-5 flex flex-wrap gap-2">
-                {ABOUT.skills.map((s) => <li key={s} className="rounded-full bg-white px-3 py-1.5 text-sm font-semibold ring-1 ring-ink/15">{s}</li>)}
+                {ABOUT.skills.map((s) => <li key={s} className="chip rounded-full bg-white px-3 py-1.5 text-sm font-semibold ring-1 ring-ink/15">{s}</li>)}
               </ul>
             </div>
-            <ul className="space-y-4">
+            <ul className="space-y-4" data-reveal="stagger">
               {ABOUT.promises.map((p) => (
-                <li key={p} className="card flex gap-3 p-5 font-semibold"><CheckIcon className="mt-0.5 shrink-0 text-teal-dark" />{p}</li>
+                <li key={p} className="card flex gap-3 p-5 font-semibold" data-tilt="5" data-glare><CheckIcon className="mt-0.5 shrink-0 text-teal-dark" />{p}</li>
               ))}
             </ul>
           </div>
         </section>
 
         {/* AUDIT */}
-        <section id="audit" className="section bg-saffron/25">
-          <div className="wrap text-center">
-            <h2 className="h2">{AUDIT.title}</h2>
+        <section id="audit" className="section cta-gradient">
+          <div className="wrap text-center" data-reveal="scale">
+            <h2 data-reveal="up" data-reveal-delay="90" className="h2">{AUDIT.title}</h2>
             <p className="mx-auto mt-3 max-w-2xl text-lg">{AUDIT.text}</p>
             <div className="mt-6 flex justify-center">
               <BookOrWhatsApp label="Get my free audit" message="Hi Neovia AI, here is my business name. Please show me 3 places I'm losing enquiries (free audit)." />
@@ -310,8 +255,8 @@ export default function Home() {
         {/* FAQ */}
         <section id="faq" className="section">
           <div className="wrap max-w-3xl">
-            <p className="eyebrow">FAQ</p>
-            <h2 className="h2 mt-2">Frequently asked questions</h2>
+            <p data-reveal="up" className="eyebrow">FAQ</p>
+            <h2 data-reveal="up" data-reveal-delay="90" className="h2 mt-2">Frequently asked questions</h2>
             <Faq />
           </div>
         </section>
@@ -319,9 +264,9 @@ export default function Home() {
         {/* CONTACT */}
         <section id="contact" className="section bg-mist">
           <div className="wrap grid gap-10 lg:grid-cols-2">
-            <div>
+            <div data-reveal="left">
               <p className="eyebrow">Contact</p>
-              <h2 className="h2 mt-2">Chat with me on WhatsApp</h2>
+              <h2 data-reveal="up" data-reveal-delay="90" className="h2 mt-2">Chat with me on WhatsApp</h2>
               <p className="mt-3 text-lg">I reply within 24 hours.</p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
                 <a href={`tel:${CONTACT.phone}`} className="btn btn-dark px-8 py-4 text-lg"><PhoneIcon /> Call {CONTACT.phone}</a>
@@ -335,12 +280,12 @@ export default function Home() {
                 <li className="flex items-center gap-2"><PinIcon /> {OWNER.city}</li>
               </ul>
             </div>
-            <ContactForm />
+            <div data-reveal="right"><ContactForm /></div>
           </div>
         </section>
       </main>
 
-      <footer className="bg-ink px-4 pb-24 pt-10 text-sm text-white/85 md:pb-10">
+      <footer className="site-footer px-4 pb-24 pt-10 text-sm text-ink/80 md:pb-10">
         <div className="wrap flex flex-col justify-between gap-4 sm:flex-row">
           <p>© {OWNER.brand} · {OWNER.city}</p>
           <p>All demos use sample data. <a className="underline" href="/privacy">Privacy</a></p>

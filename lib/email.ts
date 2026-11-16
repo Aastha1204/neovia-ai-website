@@ -24,6 +24,9 @@ export function receiptHtml(r: ReceiptData) {
     <p style="margin-top:16px;color:#555;font-size:13px">Questions? Reply to this email or WhatsApp ${esc(CONTACT.phone)}.</p></div>`;
 }
 
+/** Where alerts to the owner go. OWNER_EMAIL if set (it must be the email your Resend account uses until a domain is verified), else the public contact email. */
+export const ownerEmail = () => process.env.OWNER_EMAIL || CONTACT.email;
+
 /** Sends email through Resend if RESEND_API_KEY is set. Returns false (and does nothing) otherwise. */
 export async function sendEmail(to: string, subject: string, html: string) {
   const key = process.env.RESEND_API_KEY;

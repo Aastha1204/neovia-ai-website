@@ -63,6 +63,43 @@ const steps: Record<string, (p: Page) => Promise<void>> = {
     await glide(p, 300, 4000);
     await sleep(5000);
   },
+  "slotpay": async (p) => {
+    await sleep(3000);
+    await glide(p, 3600, 14000);
+    await sleep(1500);
+  },
+  "billease": async (p) => {
+    await sleep(3000);
+    await tryClick(p, /enter as business owner/i);
+    await sleep(4000);
+    await glide(p, 1800, 9000);
+    await sleep(1500);
+  },
+  "callcatch": async (p) => {
+    await sleep(3500);
+    await glide(p, 500, 3000);
+    await tryClick(p, /open dashboard/i);
+    await sleep(4000);
+    await glide(p, 1500, 6000);
+    await sleep(1500);
+  },
+  "postpilot": async (p) => {
+    await sleep(3500);
+    await tryClick(p, /start demo/i);
+    await sleep(4000);
+    await glide(p, 1800, 8000);
+    await sleep(1500);
+  },
+  "leadlaunch": async (p) => {
+    await sleep(4000);
+    await glide(p, 4200, 15000);
+    await sleep(1500);
+  },
+  "leadlens": async (p) => {
+    await sleep(3500);
+    await glide(p, 3600, 14000);
+    await sleep(1500);
+  },
   "ca-dashboard": async (p) => {
     await sleep(3000);
     await tryClick(p, /open live demo/i);
