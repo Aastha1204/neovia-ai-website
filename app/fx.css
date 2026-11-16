@@ -147,3 +147,71 @@ section.bg-ink { background: transparent; }
 .glass-tile-icon { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: linear-gradient(135deg, #8db9f0, #f5b69e); color: #fff; box-shadow: 0 8px 18px -8px rgba(63,123,212,.8); }
 .hero-glass { padding: 10px; border-radius: 1.75rem; background: rgba(255,255,255,.4); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,.85); box-shadow: 0 50px 90px -40px rgba(63,123,212,.6), inset 0 1px 0 #fff; }
 input, textarea, select { background: rgba(255,255,255,.7) !important; }
+
+/* =====================================================================
+   Phones and tablets: tighter, lighter, and safe on iOS (notch, home bar) and Android
+   ===================================================================== */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html body { overflow-x: clip; -webkit-tap-highlight-color: transparent; }
+html a, html button, html summary, html label, html select { touch-action: manipulation; }
+
+/* header: safe area under the notch, compact icon buttons */
+html .site-header-bar { padding-top: env(safe-area-inset-top); }
+html .hdr-btn { min-height: 44px; }
+@media (max-width: 639px) { html .hdr-btn.btn { padding: 0.6rem; width: 44px; height: 44px; border-radius: 9999px; } }
+@media (max-width: 767px) { html .btn.book-desktop { display: none; } }
+
+/* hamburger sheet */
+html .mobile-menu { position: fixed; left: 0; right: 0; top: calc(56px + env(safe-area-inset-top)); bottom: 0; z-index: 60; overflow-y: auto; padding: 1rem 1rem calc(1.5rem + env(safe-area-inset-bottom));
+  background: rgba(244,243,251,.96); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); animation: fx-sheet .28s var(--ease-out) both; }
+@keyframes fx-sheet { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+/* floating chat button + panel: respect the home bar and use dynamic viewport height (iOS Safari toolbar, Android keyboard) */
+html .fab-bl { left: calc(1rem + env(safe-area-inset-left)); bottom: calc(1rem + env(safe-area-inset-bottom)); }
+html .fab-br { right: calc(1rem + env(safe-area-inset-right)); bottom: calc(1rem + env(safe-area-inset-bottom)); }
+html .neo-panel { left: calc(0.75rem + env(safe-area-inset-left)); right: calc(0.75rem + env(safe-area-inset-right)); bottom: calc(0.75rem + env(safe-area-inset-bottom)); max-height: min(78dvh, 640px);
+  border-radius: 1.25rem; border: 1px solid rgba(43,47,85,.15); background: #fff; box-shadow: 0 30px 70px -20px rgba(43,47,85,.45); }
+@media (min-width: 640px) { .neo-panel { right: auto; width: 380px; } }
+html .site-footer { padding-bottom: calc(6.5rem + env(safe-area-inset-bottom)); }
+@media (min-width: 768px) { .site-footer { padding-bottom: 2.5rem; } }
+
+/* pricing plan cards: swipe sideways on phones */
+@media (max-width: 767px) {
+  html .swipe-row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 0.85rem; margin-left: -1rem; margin-right: -1rem; padding: 0.4rem 1rem 0.9rem; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  html .swipe-row::-webkit-scrollbar { display: none; }
+}
+
+@media (max-width: 767px) {
+  html { scroll-padding-top: 4.5rem; }
+  html .section { padding: 2.75rem 1rem; }
+  html .h2 { font-size: clamp(1.45rem, 6.2vw, 1.85rem); }
+  html .card { border-radius: 1.1rem; }
+  html .btn { min-height: 46px; padding-left: 1.1rem; padding-right: 1.1rem; }
+  /* iOS Safari zooms the page when an input is smaller than 16px */
+  html input, html textarea, html select { font-size: 16px !important; min-height: 46px; }
+  html textarea { min-height: 96px; }
+  html dialog.book-dialog { max-height: 92dvh; }
+  html .fx-loader-blob { filter: blur(50px); }
+}
+
+/* touch devices: drop the effects that cost battery or fight with scrolling */
+@media (pointer: coarse), (max-width: 767px) {
+  html .card, html .glass, html .hero-glass, html .glass-tile, html .site-footer { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  html .card { background: rgba(255,255,255,.88); }
+  html .glass { background: rgba(255,255,255,.82); }
+  html .hero-glass { background: rgba(255,255,255,.62); }
+  html .site-footer { background: rgba(255,255,255,.55); }
+  html [data-tilt] { transform: none !important; will-change: auto; transform-style: flat; transition: none; }
+  html [data-tilt][data-glare]::after { display: none; }
+  html [data-parallax] { translate: 0 0 !important; will-change: auto; }
+  html .orb { filter: blur(48px); animation-duration: 34s; }
+  html .btn::before { display: none; }
+  html .btn { transform: none; }
+  html .btn:hover { transform: none; }
+  html .float { animation: none; }
+  html .work-card:hover { translate: 0 0; box-shadow: inherit; }
+}
+@media (prefers-reduced-motion: reduce) { html .mobile-menu { animation: none; } }
+
+/* sideways reveals start a little outside the screen: clip them so the page never gets a horizontal scroll (iOS especially) */
+html, html main { overflow-x: clip; }

@@ -47,12 +47,14 @@ void main(){
   gl_FragColor = vec4(col, 1.0);
 }`;
 
-export default function ShaderBackground({ intensity = 1, className = "" }: { intensity?: number; className?: string }) {
+export default function ShaderBackground({ intensity = 1, className = "", still = false }: { intensity?: number; className?: string; still?: boolean }) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = ref.current;
     if (!canvas) return;
+    const touch = window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768;
+    if (still && touch) return; // phones keep the soft CSS gradient behind this section, with no WebGL running
     const gl = canvas.getContext("webgl", { antialias: false, alpha: false, powerPreference: "low-power" });
     if (!gl) return; // CSS gradient fallback stays visible
 
@@ -94,7 +96,7 @@ export default function ShaderBackground({ intensity = 1, className = "" }: { in
     const start = performance.now();
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const dpr = touch ? 0.75 : Math.min(window.devicePixelRatio || 1, 1.5);
       const w = Math.floor(canvas.clientWidth * dpr), h = Math.floor(canvas.clientHeight * dpr);
       if (canvas.width !== w || canvas.height !== h) {
         canvas.width = w;
@@ -103,7 +105,10 @@ export default function ShaderBackground({ intensity = 1, className = "" }: { in
       }
     };
 
+    let lastT = 0;
     const frame = () => {
+      if (touch && !reduced && performance.now() - lastT < 33) { raf = requestAnimationFrame(frame); return; } // about 30 frames a second on phones
+      lastT = performance.now();
       resize();
       mouse.x += (mouse.tx - mouse.x) * 0.06;
       mouse.y += (mouse.ty - mouse.y) * 0.06;

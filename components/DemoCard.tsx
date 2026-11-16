@@ -5,7 +5,7 @@ import { ArrowIcon, CheckIcon, WhatsAppIcon } from "./Icons";
 
 export default function DemoCard({ demo, cardEnabled }: { demo: Demo; cardEnabled: boolean }) {
   return (
-    <article className="card flex flex-col gap-8 p-5 sm:p-6">
+    <article className="card flex flex-col gap-5 p-4 sm:gap-8 sm:p-6">
       <DemoVisual demo={demo} />
       <div className="mt-2 flex flex-1 flex-col">
         <div className="flex flex-wrap items-center gap-2">
@@ -15,7 +15,7 @@ export default function DemoCard({ demo, cardEnabled }: { demo: Demo; cardEnable
         <h3 className="mt-3 text-xl font-extrabold">{demo.title}</h3>
         {demo.price && <p className="text-sm font-bold text-teal-dark">Setup from ₹{demo.price.toLocaleString("en-IN")}</p>}
         <p className="mt-1 font-semibold text-ink-soft">{demo.outcomeLine}</p>
-        <p className="mt-2 text-sm text-ink/80">{demo.description}</p>
+        <p className="mt-2 text-sm text-ink/80 max-sm:hidden">{demo.description}</p>
         <ul className="mt-4 space-y-2 text-sm">
           {demo.features.map((f) => (
             <li key={f} className="flex gap-2">

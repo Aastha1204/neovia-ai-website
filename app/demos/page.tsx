@@ -23,7 +23,7 @@ export default function DemosPage() {
           <Orbs />
           <div className="wrap relative">
             <Showreel />
-            <div className="mt-10 grid gap-10 lg:grid-cols-2" data-reveal="stagger">
+            <div className="mt-8 grid gap-6 lg:mt-10 lg:grid-cols-2 lg:gap-10" data-reveal="stagger">
               {DEMOS.map((d) => <DemoCard key={d.slug} demo={d} cardEnabled={Boolean(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)} />)}
             </div>
             <div className="mt-12 text-center">

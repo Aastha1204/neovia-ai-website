@@ -27,16 +27,17 @@ export default function Loader() {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- the loader can only decide to show once it can read sessionStorage in the browser
     setState("on");
     document.documentElement.classList.add("fx-loading");
+    const SHOW = window.innerWidth < 768 ? 650 : SHOW_MS;
     const t0 = performance.now();
     let raf = 0;
     const tick = () => {
-      const p = Math.min(1, (performance.now() - t0) / (SHOW_MS - 150));
+      const p = Math.min(1, (performance.now() - t0) / (SHOW - 150));
       setPct(Math.round((1 - Math.pow(1 - p, 3)) * 100));
       if (p < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
-    const t1 = setTimeout(() => { setState("done"); document.documentElement.classList.remove("fx-loading"); }, SHOW_MS);
-    const t2 = setTimeout(() => setState("off"), GONE_MS);
+    const t1 = setTimeout(() => { setState("done"); document.documentElement.classList.remove("fx-loading"); }, SHOW);
+    const t2 = setTimeout(() => setState("off"), SHOW + 750);
     return () => { cancelAnimationFrame(raf); clearTimeout(t1); clearTimeout(t2); document.documentElement.classList.remove("fx-loading"); };
   }, []);
 

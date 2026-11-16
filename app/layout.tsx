@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title, description, images: ["/og.jpg"] },
 };
 
-export const viewport: Viewport = { themeColor: "#1F2340", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#dbe8fb", width: "device-width", initialScale: 1, viewportFit: "cover" };
 
 const jsonLd = {
   "@context": "https://schema.org",

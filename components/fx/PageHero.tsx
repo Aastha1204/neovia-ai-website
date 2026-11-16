@@ -5,7 +5,7 @@ import SplitText from "./SplitText";
 export default function PageHero({ eyebrow, title, text, children }: { eyebrow: string; title: string; text?: string; children?: React.ReactNode }) {
   return (
     <section className="relative overflow-hidden bg-mist px-4 pb-16 pt-14 text-ink sm:pb-20 sm:pt-20">
-      <HeroFX particles={false} intensity={0.9} />
+      <HeroFX particles={false} intensity={0.9} still />
       <div className="wrap relative">
         <p className="eyebrow rise">{eyebrow}</p>
         <h1 className="mt-3 max-w-3xl text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl"><SplitText text={title} /></h1>

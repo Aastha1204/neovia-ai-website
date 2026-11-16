@@ -41,6 +41,7 @@ export default function Home() {
     <>
       <Header />
       <main id="top">
+        <div className="flex flex-col max-md:flex-col-reverse">
         <WorkCarousel
           works={WORKS.map((w) => {
             const h = HERO_SLIDES.find((s) => s.service === w.title);
@@ -49,11 +50,11 @@ export default function Home() {
           })}
         />
         {/* HERO */}
-        <section className="section relative overflow-hidden bg-mist pb-24 pt-14 text-ink">
+        <section className="section relative overflow-hidden bg-mist pb-14 pt-8 text-ink md:pb-24 md:pt-14">
           <HeroFX />
           <div className="wrap relative grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <p className="eyebrow rise">{OWNER.brand} · {OWNER.city}</p>
+              <p className="eyebrow rise !text-ink/75">{OWNER.brand} · {OWNER.city}</p>
               <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl"><SplitText text={HERO.headline} start={120} /></h1>
               <p className="rise rise-2 mt-5 max-w-xl text-lg text-ink/80">{HERO.sub}</p>
               <div className="rise rise-3 mt-7 flex flex-col gap-3 sm:flex-row">
@@ -62,7 +63,7 @@ export default function Home() {
                 </a>
                 <a href="#demos" data-magnetic data-cursor-text="Scroll" className="btn btn-ghost text-ink">See live demos</a>
               </div>
-              <ul className="rise rise-3 mt-7 flex flex-wrap gap-2">
+              <ul className="rise rise-3 mt-7 hidden flex-wrap gap-2 sm:flex">
                 {HERO.chips.map((c) => (
                   <li key={c} className="chip rounded-full bg-white/70 px-3 py-1.5 text-sm font-semibold ring-1 ring-ink/10">{c}</li>
                 ))}
@@ -83,17 +84,18 @@ export default function Home() {
           </div>
           <FloatingTiles />
         </section>
+        </div>
 
         {/* PROBLEMS */}
         <section className="section">
           <div className="wrap">
             <p data-reveal="up" className="eyebrow">The cost of doing nothing</p>
             <h2 data-reveal="up" data-reveal-delay="90" className="h2 mt-2 max-w-2xl">Every day, some enquiries quietly slip away</h2>
-            <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-reveal="stagger">
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:gap-5 lg:grid-cols-4" data-reveal="stagger">
               {PROBLEMS.map((p) => (
-                <div key={p.title} className="card p-6" data-tilt="8" data-glare>
-                  <h3 className="text-lg font-extrabold">{p.title}</h3>
-                  <p className="mt-2 text-sm text-ink/80">{p.text}</p>
+                <div key={p.title} className="card p-4 sm:p-6" data-tilt="8" data-glare>
+                  <h3 className="text-base font-extrabold leading-snug sm:text-lg">{p.title}</h3>
+                  <p className="mt-1.5 text-xs text-ink/80 sm:mt-2 sm:text-sm">{p.text}</p>
                 </div>
               ))}
             </div>
@@ -145,7 +147,7 @@ export default function Home() {
             <h2 data-reveal="up" data-reveal-delay="90" className="h2 mt-2 max-w-2xl">See a free demo: these are real, working demos</h2>
             <p className="mt-3 text-ink/80">Each demo uses sample data. {DEMO_NOTE}</p>
             <Showreel />
-            <div className="mt-10 grid gap-10 lg:grid-cols-2" data-reveal="stagger">
+            <div className="mt-8 grid gap-6 max-lg:[&>article:nth-child(n+3)]:hidden lg:mt-10 lg:grid-cols-2 lg:gap-10" data-reveal="stagger">
               {DEMOS.slice(0, 4).map((d) => <DemoCard key={d.slug} demo={d} cardEnabled={Boolean(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)} />)}
             </div>
             <div className="mt-10 text-center" data-reveal="up">
@@ -205,7 +207,7 @@ export default function Home() {
 
         {/* HOW IT WORKS */}
         <section className="section relative overflow-hidden bg-mist text-ink">
-          <ShaderBackground intensity={0.7} />
+          <ShaderBackground intensity={0.7} still />
           <div className="wrap relative">
             <p data-reveal="up" className="eyebrow">How it works</p>
             <h2 data-reveal="up" data-reveal-delay="90" className="h2 mt-2">Four simple steps</h2>

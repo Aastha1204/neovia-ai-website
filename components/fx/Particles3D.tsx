@@ -14,7 +14,9 @@ export default function Particles3D({ count = 1400 }: { count?: number }) {
     const host = ref.current;
     if (!host) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const total = window.innerWidth < 640 ? Math.round(count * 0.4) : count; // lighter on phones, where the text sits over it
+    // Phones and tablets: no 3D particle field (saves battery, memory and a WebGL context). The shader already gives the hero its motion.
+    if (window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768) return;
+    const total = count;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "low-power" });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));

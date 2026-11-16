@@ -14,7 +14,7 @@ function monthlyText(t: PricingTier) {
 
 function TierCard({ p, t }: { p: PricingProduct; t: PricingTier }) {
   return (
-    <div className={`card relative flex flex-col p-6 ${t.popular ? "ring-2 ring-saffron" : ""}`} data-tilt="5">
+    <div className={`card relative flex flex-col p-5 sm:p-6 max-md:w-[82%] max-md:shrink-0 max-md:snap-center ${t.popular ? "ring-2 ring-saffron" : ""}`} data-tilt="5">
       {t.popular && <span className="absolute -top-3 left-6 rounded-full bg-saffron px-3 py-1 text-xs font-extrabold">Most popular</span>}
       <p className="text-sm font-extrabold uppercase tracking-wide text-teal-dark">{t.name}</p>
       <p className="mt-2 text-2xl font-extrabold">{inr(t.setup)} <span className="text-sm font-semibold text-ink/70">one-time setup</span></p>
@@ -63,7 +63,7 @@ export default function PricingTabs() {
           <h3 className="text-2xl font-extrabold">{p.name}</h3>
           <p className="mt-1 font-semibold">{p.tagline}</p>
           <p className="text-sm text-ink/70">Best for: {p.best_for}</p>
-          <div className="mt-4 grid gap-5 md:grid-cols-3" data-reveal="stagger">
+          <div className="swipe-row mt-4 grid gap-5 md:grid-cols-3" data-reveal="stagger">
             {p.tiers.map((t) => <TierCard key={t.name} p={p} t={t} />)}
           </div>
           {p.note && <p className="mt-3 text-sm text-ink/70">{p.note}</p>}
@@ -74,9 +74,9 @@ export default function PricingTabs() {
         <section id="growth-plans" className="mt-12 scroll-mt-24">
           <h3 className="text-2xl font-extrabold">Growth Plans</h3>
           <p className="mt-1 text-ink/80">We run several services for you every month, with one fee and one point of contact.</p>
-          <div className="mt-4 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="swipe-row mt-4 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {PRICING.growth_plans.map((g, i) => (
-              <div key={g.name} className={`card relative flex flex-col p-6 ${i === 2 ? "ring-2 ring-saffron" : ""}`} data-tilt="5">
+              <div key={g.name} className={`card relative flex flex-col p-5 sm:p-6 max-md:w-[82%] max-md:shrink-0 max-md:snap-center ${i === 2 ? "ring-2 ring-saffron" : ""}`} data-tilt="5">
                 {i === 2 && <span className="absolute -top-3 left-6 rounded-full bg-saffron px-3 py-1 text-xs font-extrabold">Best for sales</span>}
                 <p className="text-sm font-extrabold uppercase tracking-wide text-teal-dark">{g.name}</p>
                 <p className="mt-2 text-2xl font-extrabold">{inr(g.monthly)} <span className="text-sm font-semibold text-ink/70">/ month</span></p>

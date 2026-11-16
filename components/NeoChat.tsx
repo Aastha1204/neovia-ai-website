@@ -80,7 +80,7 @@ export default function NeoChat() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="fixed bottom-4 left-4 z-50 flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-extrabold text-white shadow-xl hover:bg-ink-soft"
+        className="fab-bl fixed z-50 flex min-h-12 items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-extrabold text-white shadow-xl hover:bg-ink-soft"
         aria-label={`Chat with ${NEO.name}`}
       >
         <span aria-hidden="true">💬</span> Chat with {NEO.name}
@@ -91,7 +91,7 @@ export default function NeoChat() {
   return (
     <section
       aria-label={`Chat with ${NEO.name}`}
-      className="fixed bottom-4 left-4 right-4 z-50 flex max-h-[80vh] flex-col overflow-hidden rounded-2xl border border-ink/15 bg-white shadow-2xl sm:right-auto sm:w-[380px]"
+      className="neo-panel fixed z-50 flex flex-col overflow-hidden rounded-2xl border border-ink/15 bg-white shadow-2xl sm:right-auto sm:w-[380px]"
     >
       <header className="flex items-center justify-between bg-ink px-4 py-3 text-white">
         <div>

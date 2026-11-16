@@ -13,6 +13,7 @@ import { useEffect } from "react";
 export default function MotionProvider() {
   useEffect(() => {
     const html = document.documentElement;
+    const fine = window.matchMedia("(pointer: fine)").matches && window.innerWidth >= 768;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     html.classList.add("fx");
     if (reduced) {
@@ -64,6 +65,7 @@ export default function MotionProvider() {
     const collectParallax = () => { parallaxEls = Array.from(document.querySelectorAll<HTMLElement>("[data-parallax]")); };
     const vh = () => window.innerHeight;
     const parallaxFrame = () => {
+      if (!fine) return;
       const h = vh();
       for (const el of parallaxEls) {
         const speed = parseFloat(el.dataset.parallax || "0.15");
@@ -137,6 +139,7 @@ export default function MotionProvider() {
       }
     };
     const onMove = (e: PointerEvent) => {
+      if (!fine) return;
       lastEvent = e;
       cancelAnimationFrame(moveRaf);
       moveRaf = requestAnimationFrame(applyMove);
@@ -155,7 +158,6 @@ export default function MotionProvider() {
     let label: HTMLDivElement | null = null;
     const cur = { x: innerWidth / 2, y: innerHeight / 2, rx: innerWidth / 2, ry: innerHeight / 2 };
     let cursorRaf = 0;
-    const fine = window.matchMedia("(pointer: fine)").matches;
     if (fine) {
       html.classList.add("fx-cursor");
       cursor = document.createElement("div");
