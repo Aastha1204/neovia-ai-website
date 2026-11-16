@@ -1,10 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
+import LogoLink from "./LogoLink";
 import { CONTACT, OWNER, PILOT_OFFER, DEFAULT_WA_MESSAGE, waLink } from "@/config/site";
 import { PhoneIcon, WhatsAppIcon } from "./Icons";
 import MobileNav from "./MobileNav";
 
 const LINKS = [
+  ["What we do", "/#what-we-do"],
   ["Demos", "/demos"],
   ["Solutions", "/#solutions"],
   ["Pricing", "/pricing"],
@@ -21,10 +22,10 @@ export default function Header() {
       )}
       <div className="site-header-bar border-b border-ink/10 bg-paper/95 backdrop-blur">
         <div className="wrap flex items-center justify-between gap-2 px-4 py-2 sm:gap-3 sm:py-3">
-          <Link href="/" className="flex shrink-0 items-center gap-2 whitespace-nowrap text-base font-extrabold tracking-tight sm:text-lg">
+          <LogoLink className="flex shrink-0 items-center gap-2 whitespace-nowrap text-base font-extrabold tracking-tight sm:text-lg">
             <Image src="/logo.png" alt="" width={36} height={36} priority className="h-9 w-9 rounded-lg" />
             {OWNER.brand}
-          </Link>
+          </LogoLink>
           <nav aria-label="Main" className="hidden items-center gap-6 text-sm font-semibold lg:flex">
             {LINKS.map(([l, h]) => (
               <a key={h} href={h} className="nav-link hover:text-teal-dark">{l}</a>

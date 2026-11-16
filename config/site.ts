@@ -127,7 +127,7 @@ export const DEMOS: Demo[] = [
   {
     slug: "admission-assistant",
     title: "AI Admission Assistant",
-    url: "https://bright-future-classes.onrender.com/",
+    url: "https://bright-future-classes-alpha.vercel.app",
     industry: "Coaching class",
     outcomeLine: "Parents get answers at 2 am, and you only call the serious leads.",
     description:
@@ -364,6 +364,39 @@ export const HERO_SLIDES: ReadonlyArray<{ service: string; demoSlug?: string; il
 
 export const DEMO_NOTE = "Free servers can take 30–50 seconds to wake up the first time you open a demo.";
 
+/** The "What is Neovia AI?" explanation section on the home page. Edit the wording here. */
+export const WHAT_WE_DO = {
+  eyebrow: "What is Neovia AI?",
+  title: "An AI agency that answers your customers, books their visits and follows up, so you never miss an enquiry",
+  intro:
+    "Neovia AI builds and runs the websites, chatbots and WhatsApp automation that local businesses use to get found, reply to every enquiry in seconds, take bookings and payments, and keep customers coming back. You focus on your clinic, class, salon or shop. We handle the technology.",
+  agencyTitle: "What does an AI agency actually do?",
+  agencyIntro: "Think of us as your outsourced AI and tech team. Here is how a project works:",
+  agencySteps: [
+    { title: "We understand your business", text: "We find where customers slip away: missed calls, slow replies, no-shows, late payments, few Google reviews." },
+    { title: "We build the right tools", text: "A website, a chatbot, WhatsApp follow-ups, a booking and payment page, an AI voice receptionist, or a dashboard, only what you need." },
+    { title: "We connect everything", text: "Your tools work with WhatsApp, Google, your calendar and UPI or card payments, so your customers use what they already know." },
+    { title: "We run it for you", text: "Hosting, updates, monitoring and a monthly report are included, and we are there when something needs a change." },
+  ],
+  benefitsTitle: "What you get",
+  benefits: [
+    "Every enquiry gets a reply in seconds, day or night",
+    "More customers found on Google Maps and booked online",
+    "Fewer no-shows and fewer forgotten follow-ups",
+    "Fees, advances and bills collected on time",
+    "Leads saved in one place, with the hot ones highlighted",
+    "One clear plan with a setup and a monthly fee, no surprises",
+  ],
+  forWho: "Made for clinics, labs, coaching classes, salons and spas, gyms, restaurants, real estate, interior designers, CA firms and other local businesses.",
+  servicesTitle: "What we build",
+  groups: {
+    "Websites & Google": "Get found on Google and turn visitors into calls, bookings and 5-star reviews.",
+    "Bookings & Payments": "Let customers book, pay and get reminders without phoning you, plus billing and client tracking for CA firms.",
+    "Leads & Marketing": "Reply to new enquiries instantly, run social posts and campaigns, and see which marketing actually brings customers.",
+    "AI Assistants": "AI that answers questions from your own documents, books slots, and picks up your calls.",
+  } as Record<string, string>,
+};
+
 export const HERO = {
   headline: "AI chatbots, automation and websites that bring your business customers 24×7",
   sub: "For Mumbai and Kalyan-Dombivli-Thane businesses: clinics, coaching classes, real estate, CAs, interior designers and gyms. See a free demo, no pressure.",
@@ -462,6 +495,7 @@ export const AUDIT = {
 };
 
 export const FAQ = [
+  { q: "What is an AI agency, and what will you do for my business?", a: "An AI agency builds and runs AI tools for businesses that do not have a tech team. For you that means a website, chatbot, WhatsApp automation, bookings and payments, or an AI receptionist, set up for your business, connected to WhatsApp and Google, and looked after every month. See the \"What is Neovia AI?\" section above for the full picture." },
   { q: "How long does a project take?", a: "A website or simple chatbot usually takes 1–2 weeks. Dashboards take 2–4 weeks and bigger systems longer. You get a timeline in writing before we start." },
   { q: "What do I need to give you?", a: "Your business details, services, prices and timings, plus any logo or photos you have. For WhatsApp automation, a business number. I tell you the exact list on the call." },
   { q: "Who owns the website and data?", a: "You do. Your website, your domain and your customer data belong to you." },

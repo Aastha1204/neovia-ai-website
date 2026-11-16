@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
 
 const LINKS: [string, string][] = [
+  ["What we do", "/#what-we-do"],
   ["Demos", "/demos"],
   ["Pricing", "/pricing"],
   ["Solutions", "/#solutions"],

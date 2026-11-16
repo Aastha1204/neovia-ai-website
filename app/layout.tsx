@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import NeoChat from "@/components/NeoChat";
 import Loader from "@/components/fx/Loader";
+import RouteScroll from "@/components/RouteScroll";
 
 // Runs before first paint: marks the page as motion-enabled so reveal styles apply from the start (skipped for reduced motion; without JS everything stays visible).
 const FX_BOOT = "try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('fx')}catch(e){}";
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Loader />
+        <RouteScroll />
         {children}
         <NeoChat />
         {ANALYTICS_ID && <Script defer data-domain={ANALYTICS_ID} src="https://plausible.io/js/script.js" strategy="afterInteractive" />}

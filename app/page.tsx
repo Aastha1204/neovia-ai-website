@@ -7,6 +7,7 @@ import HeroFX from "@/components/fx/HeroFX";
 import ShaderBackground from "@/components/fx/ShaderBackground";
 import SplitText from "@/components/fx/SplitText";
 import Orbs from "@/components/fx/Orbs";
+import WhatWeDo from "@/components/WhatWeDo";
 import FloatingTiles from "@/components/fx/FloatingTiles";
 import { demoShots } from "@/components/DemoVisual";
 import HeroCarousel from "@/components/HeroCarousel";
@@ -41,7 +42,7 @@ export default function Home() {
     <>
       <Header />
       <main id="top">
-        <div className="flex flex-col max-md:flex-col-reverse">
+        <div className="flex flex-col">
         <WorkCarousel
           works={WORKS.map((w) => {
             const h = HERO_SLIDES.find((s) => s.service === w.title);
@@ -85,6 +86,9 @@ export default function Home() {
           <FloatingTiles />
         </section>
         </div>
+
+        {/* WHAT IS NEOVIA AI */}
+        <WhatWeDo />
 
         {/* PROBLEMS */}
         <section className="section">
