@@ -34,8 +34,18 @@ export default function MotionProvider() {
           io.unobserve(el);
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+      // threshold 0 (not 0.12): a very tall element, like the grid of all demos, can never be 12% visible, so it would stay hidden forever.
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" },
     );
+    // Safety net: if an element is somehow still hidden while it sits well inside the screen, show it.
+    const rescue = () => {
+      const h = window.innerHeight;
+      document.querySelectorAll<HTMLElement>("[data-reveal]:not(.in)").forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < h * 0.9 && r.bottom > 0) { el.classList.add("in"); io.unobserve(el); }
+      });
+    };
+    const rescueTimer = setInterval(rescue, 1500);
     const scan = () => {
       document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((el) => {
         if (seen.has(el)) return;
@@ -192,6 +202,7 @@ export default function MotionProvider() {
 
     return () => {
       clearTimeout(startTimer);
+      clearInterval(rescueTimer);
       io.disconnect(); mo.disconnect();
       cancelAnimationFrame(scanRaf); cancelAnimationFrame(scrollRaf); cancelAnimationFrame(moveRaf); cancelAnimationFrame(cursorRaf);
       window.removeEventListener("scroll", onScroll);

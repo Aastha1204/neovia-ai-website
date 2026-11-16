@@ -9,7 +9,7 @@ export const OWNER = {
   tagline: "AI chatbots, WhatsApp automation and websites for local businesses",
   city: "Mumbai, India",
   degree: "B.Tech CSE (AI & ML)",
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://neovia-ai.vercel.app",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://neoviaai.in",
 };
 
 export const CONTACT = {
@@ -143,7 +143,7 @@ export const DEMOS: Demo[] = [
   {
     slug: "clinic-website",
     title: "Clinic Website",
-    url: "https://smile-craft-next.onrender.com/",
+    url: "https://smile-craft-next-ten.vercel.app",
     industry: "Dental clinic",
     outcomeLine: "Patients see your treatments and prices, then book a slot in under a minute.",
     description:
@@ -159,7 +159,7 @@ export const DEMOS: Demo[] = [
   {
     slug: "ca-dashboard",
     title: "CA Client Dashboard",
-    url: "https://cademo.onrender.com/",
+    url: "https://cademo-five.vercel.app",
     industry: "CA firm",
     outcomeLine: "Follow-ups, filings and documents in one place instead of scattered sheets.",
     description:
