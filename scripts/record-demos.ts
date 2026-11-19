@@ -100,6 +100,13 @@ const steps: Record<string, (p: Page) => Promise<void>> = {
     await glide(p, 3600, 14000);
     await sleep(1500);
   },
+  "agentic-chatbot": async (p) => {
+    await sleep(3500);
+    await tryClick(p, /book a free inspection/i);
+    await sleep(6000);
+    await glide(p, 400, 3000);
+    await sleep(2000);
+  },
   "ca-dashboard": async (p) => {
     await sleep(3000);
     await tryClick(p, /open live demo/i);

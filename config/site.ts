@@ -316,6 +316,22 @@ export const DEMOS: Demo[] = [
     image: "/demos/leadlens",
     price: null, // custom: customer enters the amount agreed on WhatsApp
   },
+  {
+    slug: "agentic-chatbot",
+    title: "Agentic AI Chatbot",
+    url: "https://nia-vvyo.onrender.com",
+    industry: "Any local business",
+    outcomeLine: "A chatbot that doesn't just answer: it helps customers book and gets things done.",
+    description:
+      "Nia, an agentic AI assistant shown on a sample roofing company. It answers questions about prices, inspections and repairs from the business's own details, books a free inspection, adds notes, and you can switch the demo to other business types.",
+    features: [
+      "Answers questions about prices, repairs and warranty for the business",
+      "Takes actions, like booking a free inspection or adding a note for the owner",
+      "Switch the demo between business types with one tap",
+    ],
+    image: "/demos/agentic-chatbot",
+    price: null, // custom: customer enters the amount agreed on WhatsApp
+  },
 ];
 
 /** Carousel at the top of the page: everything I build. icon keys map to components/WorkCarousel.tsx */
@@ -358,7 +374,7 @@ export const HERO_SLIDES: ReadonlyArray<{ service: string; demoSlug?: string; il
   { service: "Mobile App", illustration: "mobile" },
   { service: "Agentic AI", illustration: "agentic" },
   { service: "RAG Chatbot", illustration: "rag" },
-  { service: "Agentic AI Chatbot", illustration: "agentic-chat" },
+  { service: "Agentic AI Chatbot", demoSlug: "agentic-chatbot" },
   { service: "AI Automation", illustration: "automation" },
 ];
 
